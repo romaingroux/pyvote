@@ -1,0 +1,30 @@
+[project]
+name = "pyvote"
+version = "0.1.0"
+description = "A Python library to simulate voting systems"
+authors = [
+    {name = "Romain Groux",email = "romaingroux@users.noreply.github.com"}
+]
+license = {text = "GNU"}
+readme = "README.md"
+requires-python = ">=3.12,<4.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.dependencies]
+numpy = "^2.3.3"
+pydantic = "2.12.4"
+
+
+[tool.poetry.group.dev.dependencies]
+bandit = "^1.8.6"
+black = "^25.9.0"
+flake8 = "^7.3.0"
+isort = "^6.0.1"
+mypy = "^1.18.2"
+pylint = "^3.3.8"
+pytest = "^8.4.2"
+pytest-cov = "^7.0.0"
+docformatter = "^1.7.7"
