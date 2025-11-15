@@ -1,0 +1,25 @@
+name: Run Tests
+
+on:
+  pull_request:
+
+jobs:
+  unittest:
+    name: test
+    runs-on: ubuntu-24.04
+
+    container:
+      image: rgroux/python-dev-ubuntu:3.12
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: make install-deps    
+     
+      - name: Linting
+        run: make lint
+
+      - name: Run unittests
+        run: make test
