@@ -27,10 +27,12 @@ class SingleRoundPluralityVote(IVotingSystem):
         weights = [candidate.popularity for candidate in self._candidates]
 
         for _ in range(self._context.population_size):
-            vote = random.choices(self._candidates, weights=weights, k=1)[0]
+            vote = random.choices(self._candidates, weights=weights, k=1)[  # nosec B311
+                0
+            ]
             statistics[vote] += 1
 
-        winner = max(statistics, key=statistics.get)
+        winner = max(statistics, key=lambda c: statistics[c])
         return VoteResult(winners=[winner], statistics=statistics)
 
     def _normalize_popularities(self) -> None:
