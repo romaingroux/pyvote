@@ -6,8 +6,8 @@ from pyvote.voting.context import Context
 
 
 class IVotingSystem(abc.ABC):
-    """The IVotingSystem defines an interface for all classes implementing a
-    voting system.
+    """The IVotingSystem defines an interface for all classes implementing a voting
+    system.
 
     :param candidates: the list of candidates voters can vote for.
     :param context: the vote parameters.
@@ -35,5 +35,5 @@ class IVotingSystem(abc.ABC):
 
     @abc.abstractmethod
     def _normalize_popularities(self) -> None:
-        """Must normalize the popularity of the different candidates to make
-        them sum to 1."""
+        """Must normalize the popularity of the different candidates to make them sum to
+        1."""

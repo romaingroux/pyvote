@@ -7,10 +7,9 @@ from pyvote.voting.vote_result import VoteResult
 
 
 class SingleRoundPluralityVote(IVotingSystem):
-    """The SingleRoundPlurality implements a single round plurality voting
-    system. Under this regime, each voter selects a single candidate from the
-    list. The candidate who gets the most votes after a single turn wins the
-    election.
+    """The SingleRoundPlurality implements a single round plurality voting system. Under
+    this regime, each voter selects a single candidate from the list. The candidate who
+    gets the most votes after a single turn wins the election.
 
     :param candidates: the list of candidates to vote for.
     :param context: the election parameters.
@@ -24,7 +23,7 @@ class SingleRoundPluralityVote(IVotingSystem):
 
         :returns: the election result.
         """
-        statistics = {candidate: 0 for candidate in self._candidates}
+        statistics = dict.fromkeys(self._candidates, 0)
         weights = [candidate.popularity for candidate in self._candidates]
 
         for _ in range(self._context.population_size):
@@ -35,8 +34,8 @@ class SingleRoundPluralityVote(IVotingSystem):
         return VoteResult(winners=[winner], statistics=statistics)
 
     def _normalize_popularities(self) -> None:
-        """Normalizes the popularity of the different candidates such that they
-        sum up to 1."""
+        """Normalizes the popularity of the different candidates such that they sum up
+        to 1."""
         total = 0.0
 
         for candidate in self._candidates:
