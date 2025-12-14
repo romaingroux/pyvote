@@ -5,8 +5,8 @@ class Candidate(pydantic.BaseModel):
     """The Candidate class models a candidate to an election.
 
     :param name: the candidate's name.
-    :param popularity: the candidate popularity, expressed as the
-        probability that an elector vote for it.
+    :param popularity: the candidate popularity, expressed as the probability that an
+        elector vote for it.
     """
 
     name: str = pydantic.Field(frozen=True)
