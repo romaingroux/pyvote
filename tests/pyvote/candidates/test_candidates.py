@@ -1,5 +1,6 @@
 import pydantic
 import pytest
+
 from pyvote.candidates.candidate import Candidate
 
 

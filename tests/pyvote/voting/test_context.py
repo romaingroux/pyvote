@@ -1,4 +1,5 @@
 import pytest
+
 from pyvote.voting.context import Context
 
 

@@ -9,6 +9,7 @@ license = {text = "GNU"}
 readme = "README.md"
 requires-python = ">=3.12,<4.0"
 
+
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
@@ -87,3 +88,9 @@ min_confidence = 80
 [tool.docformatter]
 wrap-summaries = 88
 wrap-descriptions = 88
+
+
+[tool.poetry]
+packages = [
+    { include = "pyvote", from = "src" }
+]

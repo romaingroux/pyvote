@@ -3,6 +3,7 @@ import random
 
 from pyvote.candidates.candidate import Candidate
 from pyvote.voting.context import Context
+from pyvote.voting.vote_result import VoteResult
 
 
 class IVotingSystem(abc.ABC):
@@ -25,7 +26,7 @@ class IVotingSystem(abc.ABC):
         self._normalize_popularities()
 
     @abc.abstractmethod
-    def vote(self) -> dict[Candidate, int]:
+    def vote(self) -> VoteResult:
         """Must run the voting simulation and returns it result.
 
         Returns:
