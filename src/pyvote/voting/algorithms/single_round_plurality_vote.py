@@ -18,30 +18,39 @@ class SingleRoundPluralityVote(IVotingSystem):
     def __init__(self, candidates: list[Candidate], context: Context) -> None:
         super().__init__(candidates=candidates, context=context)
 
+        # turn popularities into probabilities
+        self._normalize_popularities()
+
     def vote(self) -> VoteResult:
         """Runs the vote and returns its results.
 
         :returns: the election result.
         """
-        statistics = dict.fromkeys(self._candidates, 0)
-        weights = [candidate.popularity for candidate in self._candidates]
+        # set seed
+        if self._context.seed:
+            random.seed(self._context.seed)
 
+        # set votes to 0 (in case)
+        for candidate in self._candidates:
+            candidate.reset()
+
+        probs = [candidate.popularity for candidate in self._candidates]
         for _ in range(self._context.population_size):
-            vote = random.choices(self._candidates, weights=weights, k=1)[  # nosec B311
-                0
-            ]
-            statistics[vote] += 1
+            voted_for: Candidate = random.choices(  # nosec B311
+                self._candidates, weights=probs, k=1
+            )[0]
+            voted_for.get_vote()
 
-        winner = max(statistics, key=lambda c: statistics[c])
-        return VoteResult(winners=[winner], statistics=statistics)
+        winner = max(self._candidates, key=lambda c: c.votes)
+        return VoteResult([winner], self._candidates)
 
     def _normalize_popularities(self) -> None:
         """Normalizes the popularity of the different candidates such that they sum up
         to 1."""
-        total = 0.0
+        popularity_tot = 0.0
 
         for candidate in self._candidates:
-            total += candidate.popularity
+            popularity_tot += candidate.popularity
 
         for candidate in self._candidates:
-            candidate.popularity = candidate.popularity / total
+            candidate.popularity = candidate.popularity / popularity_tot
